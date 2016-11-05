@@ -5,6 +5,7 @@ import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -110,11 +111,13 @@ public class StockDataCollector {
     public void pullStockData()
     {
         //this is the wait time to prevent hitting the query limit of 200 per hour.
-        //waiting 2 sec will give 1800 queries per hour.
-        long waitTime = 2000;
+        //waiting 1.9 sec will give about 1800-1900 queries per hour based on how long the other statements take to execute.
+        long waitTime = 1900;
 
         for(int i = 0; i < parsedTerroristDates.size(); i++)
         {
+            System.out.println("Started reading stock data for " + parsedTerroristDates.get(i) + " at " + new Date().toString());
+
             ArrayList<String> stockData = new ArrayList<String>();
 
             String[] dateLine = parsedTerroristDates.get(i).split("/");
@@ -161,7 +164,6 @@ public class StockDataCollector {
                         //format the data line to remove the date and add the stock id
                         stockDataLine = stockID + ","+ stockDataLine.substring(stockDataLine.indexOf(",")+1, stockDataLine.length());
                         stockData.add(stockDataLine);
-                        System.out.println("Pulled stock " + stockID);
                     }
                 }
                 catch (MalformedURLException e)
@@ -173,7 +175,7 @@ public class StockDataCollector {
                 catch(FileNotFoundException e)
                 {
                     System.err.println("Error pulling stock data for stock "+ stockID + " on date " + parsedTerroristDates.get(i) +
-                                        "No data returned. Skipping stock");
+                                        " No data returned. Skipping stock");
                     e.printStackTrace();
                     missingStock = true;
                     missingStocks += stockID+"\n";
@@ -205,8 +207,6 @@ public class StockDataCollector {
 
             try
             {
-                System.out.print(outputFile.getAbsolutePath());
-
                 //if the output file already exists delete it
                 if(outputFile.exists())
                     outputFile.delete();
@@ -216,7 +216,6 @@ public class StockDataCollector {
 
                dataWriter = new BufferedWriter(new FileWriter(outputFile));
 
-               System.out.print(fileContents);
                dataWriter.write(fileContents);
                dataWriter.flush();
 
@@ -241,6 +240,8 @@ public class StockDataCollector {
                 e.printStackTrace();
                 System.exit(-1);
             }
+
+            System.out.println("Finished reading stock data for " + parsedTerroristDates.get(i) + " at " + new Date().toString());
         }
     }
 
