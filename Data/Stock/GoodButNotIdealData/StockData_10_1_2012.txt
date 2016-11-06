@@ -1,0 +1,9 @@
+Data for the following stocks was not found
+TWTR
+HLT
+SLOT
+ARMK
+KHC
+NERO
+SHCW
+WLTW
