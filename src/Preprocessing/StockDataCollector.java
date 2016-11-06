@@ -1,13 +1,11 @@
 package Preprocessing;
 
+import java.awt.*;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Johnny on 11/3/2016.
@@ -67,7 +65,6 @@ public class StockDataCollector {
     public void parseTerroristData()
     {
         BufferedReader dataReader = null;
-        ArrayList<String> tempDataStorage = new ArrayList<String>();
 
         try
         {
@@ -82,28 +79,34 @@ public class StockDataCollector {
 
         try
         {
+
+            GregorianCalendar dayOfWeekChecker;
+            String [] dateLine;
+            int dayOfWeek;
             String line = "";
             while ((line = dataReader.readLine()) != null)
             {
-                tempDataStorage.add(line);
+                if(!parsedTerroristDates.contains(line))
+                {
+                    dateLine = line.split("/");
+
+                    //-1 on month to adjust for the fact that month is 0 based while dayInMonth is not for some reason...
+                    dayOfWeekChecker = new GregorianCalendar(Integer.parseInt(dateLine[2]),Integer.parseInt(dateLine[0]) - 1,Integer.parseInt(dateLine[1]));
+                    dayOfWeek = dayOfWeekChecker.get(GregorianCalendar.DAY_OF_WEEK);
+
+                    if(dayOfWeek != GregorianCalendar.SUNDAY && dayOfWeek != GregorianCalendar.SATURDAY)
+                    {
+                        parsedTerroristDates.add(line);
+                    }
+                }
             }
 
             dataReader.close();
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             System.err.println("Error reading Stock IDs");
             e.printStackTrace();
             System.exit(-1);
-        }
-
-        //remove the duplicates in the array list
-        for(String date : tempDataStorage )
-        {
-            if(!parsedTerroristDates.contains(date))
-            {
-                parsedTerroristDates.add(date);
-            }
         }
     }
 
@@ -124,6 +127,9 @@ public class StockDataCollector {
 
 
             String fileName = "StockData_" + dateLine[0] + "_" + dateLine[1] + "_" + dateLine[2];
+            //the api wants the month to be zero indexed
+            dateLine[0] = String.valueOf(Integer.parseInt(dateLine[0]) - 1);
+
             String fileContents = "";
             File outputFile = new File(outputDirectory  + File.separator + fileName + ".csv");
             BufferedWriter dataWriter;
@@ -135,7 +141,7 @@ public class StockDataCollector {
 
             for(int j = 0; j < stockIDs.size(); j++)
             {
-                String stockDataLine;
+                String stockDataLine = "";
 
                 //parts of the url
                 String apiURL;
@@ -145,9 +151,9 @@ public class StockDataCollector {
                 String endOfUrl = "&g=d&ignore=.csv";
 
                 dateArgs = "&a=" + dateLine[0] + "&b=" +  dateLine[1] + "&c=" +  dateLine[2] +
-                             "&e=" + dateLine[0] + "&f=" +  dateLine[1] + "&g=" +  dateLine[2];
+                           "&d=" + dateLine[0] + "&e=" +  dateLine[1] + "&f=" +  dateLine[2];
 
-                apiURL = urlBase+stockID+dateArgs+endOfUrl;
+               apiURL = urlBase+stockID+dateArgs+endOfUrl;
 
                 try {
                     URL oracle = new URL(apiURL);
@@ -175,8 +181,7 @@ public class StockDataCollector {
                 catch(FileNotFoundException e)
                 {
                     System.err.println("Error pulling stock data for stock "+ stockID + " on date " + parsedTerroristDates.get(i) +
-                                        " No data returned. Skipping stock");
-                    e.printStackTrace();
+                                        " No data returned: FileNotFoundException. Skipping stock");
                     missingStock = true;
                     missingStocks += stockID+"\n";
 
