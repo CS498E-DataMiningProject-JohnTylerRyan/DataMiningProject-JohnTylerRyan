@@ -105,4 +105,18 @@ public class PercentageChangeCalc {
             System.exit(-1);
         }
     }
+
+    public static void main(String[] args)
+    {
+        if(args.length != 3)
+        {
+            System.err.println("Error: Passed arguments are in proper formatted. There needs to be three arguments: " +
+                    "\nData folder path, open column number, close column number \n" +
+                    "IN THAT ORDER!!");
+            System.exit(-1);
+        }
+
+        read(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+    }
+
 }
