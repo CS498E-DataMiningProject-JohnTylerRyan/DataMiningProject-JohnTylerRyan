@@ -7,23 +7,46 @@ import java.util.ArrayList;
  * Created by Ryan on 11/3/2016.
  */
 public class PercentageChangeCalc {
-    public static void read(String dataFolderPath, int numDataFiles, int openIndex, int closeIndex) {
+    public static void read(String dataFolderPath, int openIndex, int closeIndex) {
         File dataFolder = new File(dataFolderPath);
 
-        File[] folderFiles = dataFolder.list();
+        File[] folderFiles = dataFolder.listFiles();
 
+        ArrayList<String> dataFiles = new ArrayList<String>();
 
-        for (int i = 0; i < numDataFiles; i++) {
+        //parse which files are data files
+        for (File f : folderFiles) {
+            String fileName = "";
+            String fileType = "";
+            int periodLastIndex = 0;
+
+            if (f.isFile()) {
+                fileName = f.getAbsolutePath();
+                periodLastIndex = fileName.lastIndexOf(".");
+
+                fileType = fileName.substring(periodLastIndex + 1);
+
+                System.out.print(fileName);
+
+                if (fileType.equals("csv")) {
+                    dataFiles.add(fileName);
+                }
+            }
+        }
+
+        for (int i = 0; i < dataFiles.size(); i++) {
             ArrayList<String> fileLines = new ArrayList<String>();
 
-            String outFilePath = "";
+            String dataFilePath = dataFiles.get(i);
 
             String[] parsedString;
             String updatedFileLine;
 
+            File dataFile = new File(dataFilePath);
+
             try {
 
-                BufferedReader br = new BufferedReader(new FileReader("data.txt"));
+                BufferedReader br = new BufferedReader(new FileReader(dataFile));
 
                 // read the first line from the text file
                 String fileRead = br.readLine();
@@ -41,25 +64,10 @@ public class PercentageChangeCalc {
                     fileLines.add(updatedFileLine);
                 }
 
-                writeToDataFile(outFilePath, fileLines);
-
-
-
-                /*for (int i = 0; fileRead != null; i++) {
-                    // use string.split to load a string array with the values from each line of
-                    // the file, using a comma as the delimiter
-                    String[] tokenize = fileRead.split(",");
-                    id[i] = tokenize[0];
-                    open[i] = Integer.parseInt(tokenize[1]);
-                    close[i] = Integer.parseInt(tokenize[2]);
-
-                    // read next line before looping
-                    // if end of file reached
-                    fileRead = br.readLine();
-                } */
+                writeToDataFile(dataFilePath, fileLines);
 
                 br.close();
-            } catch (FileNotFoundException fnfe) {
+            } catch (FileNotFoundException e) {
                 System.out.println("file not found");
             } catch (IOException ioe) {
                 ioe.printStackTrace();
