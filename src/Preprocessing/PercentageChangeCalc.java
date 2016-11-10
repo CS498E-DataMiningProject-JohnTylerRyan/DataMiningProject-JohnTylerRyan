@@ -16,9 +16,9 @@ public class PercentageChangeCalc {
 
         //parse which files are data files
         for (File f : folderFiles) {
-            String fileName = "";
-            String fileType = "";
-            int periodLastIndex = 0;
+            String fileName;
+            String fileType;
+            int periodLastIndex;
 
             if (f.isFile()) {
                 fileName = f.getAbsolutePath();
@@ -105,14 +105,4 @@ public class PercentageChangeCalc {
             System.exit(-1);
         }
     }
-
-
-    public static void change(int[] open, int[] close) {
-        int[] change = new int[200];
-        int num = 1000;
-        for (int i = 0; i <= num; i++) {
-            change[i] = (close[i] - open[i]) / close[i];
-        }
-    }
-
 }
