@@ -33,30 +33,34 @@ public class PercentageChangeCalc {
             }
         }
 
-        for (int i = 0; i < dataFiles.size(); i++) {
+        for (int i = 0; i < dataFiles.size(); i++)
+        {
             ArrayList<String> fileLines = new ArrayList<String>();
 
             String dataFilePath = dataFiles.get(i);
+            File dataFile = new File(dataFilePath);
 
             String[] parsedString;
             String updatedFileLine;
 
-            File dataFile = new File(dataFilePath);
 
-            try {
+
+            try
+            {
 
                 BufferedReader br = new BufferedReader(new FileReader(dataFile));
 
                 // read the first line from the text file
                 String fileRead = br.readLine();
 
-                while (fileRead != null) {
+                while (fileRead != null)
+                {
                     parsedString = fileRead.split(",");
 
-                    int open = Integer.parseInt(parsedString[openIndex]);
-                    int close = Integer.parseInt(parsedString[closeIndex]);
+                    double open = Double.parseDouble(parsedString[openIndex]);
+                    double close = Double.parseDouble(parsedString[closeIndex]);
 
-                    int change = (close - open) / close;
+                    double change = (close - open) / close;
 
                     updatedFileLine = fileRead + "," + change + "\n";
 
@@ -66,9 +70,13 @@ public class PercentageChangeCalc {
                 writeToDataFile(dataFilePath, fileLines);
 
                 br.close();
-            } catch (FileNotFoundException e) {
+            }
+            catch (FileNotFoundException e)
+            {
                 System.out.println("file not found");
-            } catch (IOException ioe) {
+            }
+            catch (IOException ioe)
+            {
                 ioe.printStackTrace();
             }
         }
