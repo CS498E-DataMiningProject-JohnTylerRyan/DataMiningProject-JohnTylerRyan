@@ -15,7 +15,8 @@ public class PercentageChangeCalc {
         ArrayList<String> dataFiles = new ArrayList<String>();
 
         //parse which files are data files
-        for (File f : folderFiles) {
+        for (File f : folderFiles)
+        {
             String fileName;
             String fileType;
             int periodLastIndex;
@@ -26,7 +27,7 @@ public class PercentageChangeCalc {
 
                 fileType = fileName.substring(periodLastIndex + 1);
 
-                System.out.print(fileName);
+                System.out.println(fileName);
 
                 if (fileType.equals("csv")) {
                     dataFiles.add(fileName);
@@ -34,7 +35,10 @@ public class PercentageChangeCalc {
             }
         }
 
-        for (int i = 0; i < dataFiles.size(); i++) {
+        System.out.println(dataFiles.size());
+        System.out.println(dataFiles);
+
+        /*for (int i = 0; i < dataFiles.size(); i++) {
             ArrayList<String> fileLines = new ArrayList<String>();
 
             String dataFilePath = dataFiles.get(i);
@@ -72,7 +76,7 @@ public class PercentageChangeCalc {
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
-        }
+        } */
     }
 
     public static void writeToDataFile(String outFilePath, ArrayList<String> fileLines) {
@@ -120,4 +124,3 @@ public class PercentageChangeCalc {
     }
 
 }
-0
