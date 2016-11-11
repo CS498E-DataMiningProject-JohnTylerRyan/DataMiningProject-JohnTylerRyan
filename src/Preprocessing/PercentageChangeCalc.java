@@ -43,24 +43,22 @@ public class PercentageChangeCalc {
             String[] parsedString;
             String updatedFileLine;
 
-
-
             try
             {
 
                 BufferedReader br = new BufferedReader(new FileReader(dataFile));
 
                 // read the first line from the text file
-                String fileRead = br.readLine();
+                String fileRead;
 
-                while (fileRead != null)
+                while ((fileRead = br.readLine()) != null)
                 {
                     parsedString = fileRead.split(",");
 
                     double open = Double.parseDouble(parsedString[openIndex]);
                     double close = Double.parseDouble(parsedString[closeIndex]);
 
-                    double change = (close - open) / close;
+                    double change = ((close - open) / open) * 100;
 
                     updatedFileLine = fileRead + "," + change + "\n";
 
