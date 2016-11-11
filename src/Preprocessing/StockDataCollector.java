@@ -44,7 +44,6 @@ public class StockDataCollector {
             System.exit(-1);
         }
 
-
         try
         {
             String line = "";
