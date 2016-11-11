@@ -27,18 +27,13 @@ public class PercentageChangeCalc {
 
                 fileType = fileName.substring(periodLastIndex + 1);
 
-                System.out.println(fileName);
-
                 if (fileType.equals("csv")) {
                     dataFiles.add(fileName);
                 }
             }
         }
 
-        System.out.println(dataFiles.size());
-        System.out.println(dataFiles);
-
-        /*for (int i = 0; i < dataFiles.size(); i++) {
+        for (int i = 0; i < dataFiles.size(); i++) {
             ArrayList<String> fileLines = new ArrayList<String>();
 
             String dataFilePath = dataFiles.get(i);
@@ -76,7 +71,7 @@ public class PercentageChangeCalc {
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
-        } */
+        }
     }
 
     public static void writeToDataFile(String outFilePath, ArrayList<String> fileLines) {
