@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Johnny on 11/11/2016.
  */
-public class PercentageCluster
+public class PercentageCluster implements Comparable<PercentageCluster>
 {
     private ArrayList<StockDataObject> includedStocks;
 
@@ -78,5 +78,16 @@ public class PercentageCluster
         output = output.substring(0, output.length() - 1);
 
         return output;
+    }
+
+    @Override
+    public int compareTo(PercentageCluster clusterB)
+    {
+        if(clusterAverageChange() < clusterB.clusterAverageChange())
+            return -1;
+        else if(clusterAverageChange() > clusterB.clusterAverageChange())
+            return 1;
+        else
+            return 0;
     }
 }
