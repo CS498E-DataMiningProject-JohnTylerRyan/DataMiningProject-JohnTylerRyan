@@ -75,7 +75,7 @@ public class PercentageCluster
         }
 
         //remove the last \n
-        output = output.substring(output.length() - 1);
+        output = output.substring(0, output.length() - 1);
 
         return output;
     }

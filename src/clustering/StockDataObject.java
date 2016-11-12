@@ -21,7 +21,7 @@ public class StockDataObject
 
     public String toString()
     {
-        return "Stock: " +  stockID + " Open: $" + openPrice + " Close: $" + openPrice + " Percent Change: " + percentChange + "%";
+        return "Stock: " +  stockID + " Open: $" + openPrice + " Close: $" + closePrice + " Percent Change: " + percentChange + "%";
     }
 
     public String getStockID()
