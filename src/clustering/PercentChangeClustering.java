@@ -42,36 +42,6 @@ public class PercentChangeClustering
 
     }
 
-    public void writeCluster()
-    {
-        BufferedWriter dataWriter;
-        File outFile;
-
-        String fileName = "clustering_of_"+dataFileLoc.substring(dataFileLoc.lastIndexOf("/") + 1,dataFileLoc.lastIndexOf("."));
-
-
-        System.out.println(outputFolder+ "/" +fileName+".txt");
-        try
-        {
-            outFile = new File(outputFolder + "/" + fileName + ".txt");
-            dataWriter = new BufferedWriter(new FileWriter(outFile));
-
-            if (outFile.exists())
-                outFile.delete();
-
-            outFile.createNewFile();
-
-            dataWriter.write(toString());
-            dataWriter.flush();
-        }
-        catch (IOException e)
-        {
-            System.err.println("Error writing clustering output");
-            e.printStackTrace();
-            System.exit(-1);
-        }
-    }
-
     public void clusteringDriver(int maxClusters)
     {
         int loopCounter = 0;
@@ -94,8 +64,9 @@ public class PercentChangeClustering
 
             //update cluster i
             CLUSTER_LIST[foundI] = ci.merge(cj);
+//            System.out.println(CLUSTER_LIST[foundI]);
 
-            //add cluster j to taboo list so it is never search again
+            //add cluster j to taboo list so it is never searched again
             tabooInsertIndex = Collections.binarySearch(clusterTabooList, foundJ);
 
             if (tabooInsertIndex < 0) {
@@ -108,6 +79,40 @@ public class PercentChangeClustering
             //update the values of the ProxMatrix
             updateMaxtrix(foundI, foundJ);
         }
+
+
+
+        writeClusteringOutput();
+    }
+
+    public void writeClusteringOutput()
+    {
+        BufferedWriter dataWriter;
+        File outFile;
+
+        String fileName = "clustering_of_" + dataFileLoc.substring(dataFileLoc.lastIndexOf(File.separatorChar) + 1,dataFileLoc.lastIndexOf("."));
+
+        System.out.println(outputFolder + File.separator + fileName.toLowerCase() + ".txt");
+        try
+        {
+            outFile = new File(outputFolder + File.separator  + fileName.toLowerCase() + ".txt");
+            dataWriter = new BufferedWriter(new FileWriter(outFile));
+
+            if (outFile.exists())
+                outFile.delete();
+
+            outFile.createNewFile();
+
+            dataWriter.write(toString());
+            dataWriter.flush();
+            dataWriter.close();
+        }
+        catch (IOException e)
+        {
+            System.err.println("Error writing clustering output");
+            e.printStackTrace();
+            System.exit(-1);
+        }
     }
 
     public int[] searchArray()
@@ -115,7 +120,7 @@ public class PercentChangeClustering
         //holds the found zipcode,  lat, and long
         int returnArray[] = new int[2];
 
-        double curMin = Integer.MAX_VALUE;
+        double curMin = Double.MAX_VALUE;
         int foundI = -1;
         int foundJ = -1;
 
@@ -154,8 +159,8 @@ public class PercentChangeClustering
     public void updateMaxtrix(int foundI, int foundJ)
     {
         //since we are using minimum distance based clustering. for each other non merged
-        //cluster update the istance to this new merged cluster by selecting the minimum
-        //distance from the selcted cluster to our two merged clusters.
+        //cluster update the instance to this new merged cluster by selecting the minimum
+        //distance from the selected cluster to our two merged clusters.
         for(int i = 0; i < CLUSTER_LIST.length; i++)
         {
             double minDist = Math.min(proxMatrix[i][foundI], proxMatrix[i][foundJ]);
@@ -204,12 +209,6 @@ public class PercentChangeClustering
             System.exit(-1);
         }
 
-        if(dataObjects.size() == 0)
-        {
-            System.err.println("No data read from file " + dataFileLoc + "\nExiting Program.");
-            System.exit(-1);
-        }
-
         return dataObjects;
     }
 
@@ -237,17 +236,27 @@ public class PercentChangeClustering
     public String toString()
     {
         String output = "Clustering output for data in file: " + dataFileLoc + "\n";
+        ArrayList<PercentageCluster> outputClusters = new ArrayList<PercentageCluster>();
+        int[] outputOrder;
 
         int clusterCount = 0;
+
+
 
         for(int i = 0; i < CLUSTER_LIST.length; i++)
         {
             if(!clusterTabooList.contains(i))
             {
-                clusterCount++;
-
-                output += "Cluster " + clusterCount + "{" + CLUSTER_LIST[i].toString() + "} \n\n";
+               outputClusters.add(CLUSTER_LIST[i]);
             }
+        }
+
+        Collections.sort(outputClusters);
+
+        for(PercentageCluster out : outputClusters)
+        {
+            clusterCount++;
+            output += "Cluster " + clusterCount + " {\n" + out.toString() + "} \n\n";
         }
 
         return output;
@@ -255,17 +264,38 @@ public class PercentChangeClustering
 
     public static void main(String[] args)
     {
-        if(args.length != 6)
+        if(args.length != 7)
         {
             System.err.println("Error: Passed arguments are not properly formatted. There needs to be four arguments: " +
-                    "\nData folder path, output folder path, stock ID column number, open column number, close column number, percent change column number\n" +
+                    "\nData folder path, output folder path, stock ID column number, open column number, close column number, percent change column number, number of clusters\n" +
                     "IN THAT ORDER!!");
             System.exit(-1);
         }
 
-        PercentChangeClustering percentClustering = new PercentChangeClustering(args[0], args[1],Integer.parseInt(args[2]),Integer.parseInt(args[3]),Integer.parseInt(args[4]), Integer.parseInt(args[5]));
+        PercentChangeClustering percentClustering;
 
-        percentClustering.clusteringDriver(10);
+        File dataFolder = new File(args[0]);
+        File[] folderFiles = dataFolder.listFiles();
+
+        for (File f : folderFiles)
+        {
+            String fileName;
+            String fileType;
+            int periodLastIndex;
+
+            if (f.isFile())
+            {
+                fileName = f.getAbsolutePath();
+                periodLastIndex = fileName.lastIndexOf(".");
+
+                fileType = fileName.substring(periodLastIndex + 1);
+
+                if (fileType.equals("csv"))
+                {
+                    percentClustering = new PercentChangeClustering(fileName, args[1],Integer.parseInt(args[2]),Integer.parseInt(args[3]),Integer.parseInt(args[4]), Integer.parseInt(args[5]));
+                    percentClustering.clusteringDriver(Integer.parseInt(args[6]));
+                }
+            }
+        }
     }
-
 }
