@@ -14,12 +14,16 @@ public class PercentChangeClustering
     private final PercentageCluster[] CLUSTER_LIST;
     private ArrayList<Integer> clusterTabooList;
 
+    private String dataFileLoc;
+    private String outputFolder;
 
-    public PercentChangeClustering(String dataFileLoc,int stockIDIndex, int openIndex, int closeIndex, int percentIndex )
+
+    public PercentChangeClustering(String dataFileLoc, String outputFolder, int stockIDIndex, int openIndex, int closeIndex, int percentIndex )
     {
-        ArrayList<StockDataObject> dataPoints;
+        this.dataFileLoc = dataFileLoc;
+        this.outputFolder = outputFolder;
 
-        dataPoints = readData(dataFileLoc, stockIDIndex, openIndex, closeIndex, percentIndex);
+        ArrayList<StockDataObject> dataPoints = readData(stockIDIndex, openIndex, closeIndex, percentIndex);
 
         CLUSTER_LIST = new PercentageCluster[dataPoints.size()];
         proxMatrix = new double[dataPoints.size()][dataPoints.size()];
@@ -36,6 +40,36 @@ public class PercentChangeClustering
 
         populateProxMatrix();
 
+    }
+
+    public void writeCluster()
+    {
+        BufferedWriter dataWriter;
+        File outFile;
+
+        String fileName = "clustering_of_"+dataFileLoc.substring(dataFileLoc.lastIndexOf("/") + 1,dataFileLoc.lastIndexOf("."));
+
+
+        System.out.println(outputFolder+ "/" +fileName+".txt");
+        try
+        {
+            outFile = new File(outputFolder + "/" + fileName + ".txt");
+            dataWriter = new BufferedWriter(new FileWriter(outFile));
+
+            if (outFile.exists())
+                outFile.delete();
+
+            outFile.createNewFile();
+
+            dataWriter.write(toString());
+            dataWriter.flush();
+        }
+        catch (IOException e)
+        {
+            System.err.println("Error writing clustering output");
+            e.printStackTrace();
+            System.exit(-1);
+        }
     }
 
     public void clusteringDriver(int maxClusters)
@@ -131,8 +165,7 @@ public class PercentChangeClustering
         }
     }
 
-
-    public ArrayList<StockDataObject> readData(String dataFileLoc, int stockIDIndex, int openIndex, int closeIndex, int percentIndex)
+    public ArrayList<StockDataObject> readData(int stockIDIndex, int openIndex, int closeIndex, int percentIndex)
     {
         ArrayList<StockDataObject> dataObjects = new ArrayList<StockDataObject>();
         BufferedReader br;
@@ -200,4 +233,39 @@ public class PercentChangeClustering
             }
         }
     }
+
+    public String toString()
+    {
+        String output = "Clustering output for data in file: " + dataFileLoc + "\n";
+
+        int clusterCount = 0;
+
+        for(int i = 0; i < CLUSTER_LIST.length; i++)
+        {
+            if(!clusterTabooList.contains(i))
+            {
+                clusterCount++;
+
+                output += "Cluster " + clusterCount + "{" + CLUSTER_LIST[i].toString() + "} \n\n";
+            }
+        }
+
+        return output;
+    }
+
+    public static void main(String[] args)
+    {
+        if(args.length != 6)
+        {
+            System.err.println("Error: Passed arguments are not properly formatted. There needs to be four arguments: " +
+                    "\nData folder path, output folder path, stock ID column number, open column number, close column number, percent change column number\n" +
+                    "IN THAT ORDER!!");
+            System.exit(-1);
+        }
+
+        PercentChangeClustering percentClustering = new PercentChangeClustering(args[0], args[1],Integer.parseInt(args[2]),Integer.parseInt(args[3]),Integer.parseInt(args[4]), Integer.parseInt(args[5]));
+
+        percentClustering.clusteringDriver(10);
+    }
+
 }
