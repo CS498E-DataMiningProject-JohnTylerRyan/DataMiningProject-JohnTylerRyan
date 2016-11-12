@@ -43,6 +43,19 @@ public class PercentageCluster
         return new PercentageCluster(mergedList);
     }
 
+    public double clusterAverageChange()
+    {
+        double sumPercentChange = 0;
+
+        for(StockDataObject sdo : includedStocks)
+        {
+            sumPercentChange += sdo.getPercentChange();
+        }
+
+        return sumPercentChange / includedStocks.size();
+    }
+
+
     public ArrayList<StockDataObject> getIncludedStocks()
     {
         return includedStocks;
