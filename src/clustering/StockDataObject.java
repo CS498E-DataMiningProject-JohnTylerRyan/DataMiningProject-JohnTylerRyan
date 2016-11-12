@@ -19,6 +19,11 @@ public class StockDataObject
         this.percentChange = percentChange;
     }
 
+    public String toString()
+    {
+        return "Stock: " +  stockID + " Open: $" + openPrice + " Close: $" + openPrice + " Percent Change: " + percentChange + "%";
+    }
+
     public String getStockID()
     {
         return stockID;
