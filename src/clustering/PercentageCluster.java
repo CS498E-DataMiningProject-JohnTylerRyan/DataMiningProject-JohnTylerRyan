@@ -65,12 +65,17 @@ public class PercentageCluster
     {
         String output = "";
 
-        output += "Total stocks included: " + includedStocks.size() + "\nStocks: " ;
+        output += "Total stocks included: " + includedStocks.size() + "\n" +
+                "Cluster's average percent change: "+ clusterAverageChange() + "\n" +
+                "Stocks: " ;
 
         for(StockDataObject zc : includedStocks)
         {
             output += zc.toString() + "\n";
         }
+
+        //remove the last \n
+        output = output.substring(output.length() - 1);
 
         return output;
     }
