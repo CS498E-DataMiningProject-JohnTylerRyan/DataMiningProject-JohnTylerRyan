@@ -80,8 +80,6 @@ public class PercentChangeClustering
             updateMaxtrix(foundI, foundJ);
         }
 
-
-
         writeClusteringOutput();
     }
 
@@ -117,7 +115,7 @@ public class PercentChangeClustering
 
     public int[] searchArray()
     {
-        //holds the found zipcode,  lat, and long
+        //holds the found zde,  lat,
         int returnArray[] = new int[2];
 
         double curMin = Double.MAX_VALUE;
@@ -139,7 +137,7 @@ public class PercentChangeClustering
                     {
                         double dist = proxMatrix[i][j];
 
-                        if(dist != 0 && dist < curMin)
+                        if(dist != Double.MIN_VALUE && dist < curMin)
                         {
                             curMin = dist;
                             foundI = i;
@@ -163,7 +161,7 @@ public class PercentChangeClustering
         //distance from the selected cluster to our two merged clusters.
         for(int i = 0; i < CLUSTER_LIST.length; i++)
         {
-            double minDist = Math.min(proxMatrix[i][foundI], proxMatrix[i][foundJ]);
+            double minDist = Math.max(proxMatrix[i][foundI], proxMatrix[i][foundJ]);
 
             proxMatrix[foundI][i] = minDist;
             proxMatrix[i][foundI] = minDist;
@@ -219,13 +217,12 @@ public class PercentChangeClustering
         {
             for(int j = i+1; j < CLUSTER_LIST.length; j++)
             {
+
                 //proximity is the difference between the two points
                 double percentOne = CLUSTER_LIST[i].getIncludedStocks().get(0).getPercentChange();
-
                 double percentTwo = CLUSTER_LIST[j].getIncludedStocks().get(0).getPercentChange();
 
                 double prox = Math.abs(percentOne - percentTwo);
-
                 //add the distance to the matrix
                 proxMatrix[i][j] = prox;
                 proxMatrix[j][i] = prox;
@@ -237,11 +234,8 @@ public class PercentChangeClustering
     {
         String output = "Clustering output for data in file: " + dataFileLoc + "\n";
         ArrayList<PercentageCluster> outputClusters = new ArrayList<PercentageCluster>();
-        int[] outputOrder;
 
         int clusterCount = 0;
-
-
 
         for(int i = 0; i < CLUSTER_LIST.length; i++)
         {
