@@ -2,19 +2,24 @@ Clustering output for data in file: C:\Users\Johnny\Dropbox\Hood\Fall2016\CS 498
 Cluster 1 {
 Total stocks included: 1
 Cluster's average percent change: -5.293737895416399
-Stocks: Stock: NEM Open: $30.98 Close: $29.34 Percent Change: -5.293737895416399%} 
+Stocks: 
+Stock: NEM Open: $30.98 Close: $29.34 Percent Change: -5.293737895416399%
+} 
 
 Cluster 2 {
 Total stocks included: 3
 Cluster's average percent change: -0.46039094199900243
-Stocks: Stock: RCL Open: $8.99 Close: $8.9 Percent Change: -1.0011123470522787%
+Stocks: 
+Stock: RCL Open: $8.99 Close: $8.9 Percent Change: -1.0011123470522787%
 Stock: TAP Open: $41.41 Close: $41.259998 Percent Change: -0.3622361748369803%
-Stock: KMB Open: $56.120003 Close: $56.11 Percent Change: -0.017824304107748427%} 
+Stock: KMB Open: $56.120003 Close: $56.11 Percent Change: -0.017824304107748427%
+} 
 
 Cluster 3 {
 Total stocks included: 12
 Cluster's average percent change: 1.3369213931968824
-Stocks: Stock: MMM Open: $59.66 Close: $60.709999 Percent Change: 1.7599715051961229%
+Stocks: 
+Stock: MMM Open: $59.66 Close: $60.709999 Percent Change: 1.7599715051961229%
 Stock: LUV Open: $8.16 Close: $8.3 Percent Change: 1.715686274509811%
 Stock: MGM Open: $10.83 Close: $11.03 Percent Change: 1.84672206832871%
 Stock: UNP Open: $47.209999 Close: $48.07 Percent Change: 1.8216501127229359%
@@ -25,12 +30,14 @@ Stock: NUE Open: $31.889999 Close: $32.240002 Percent Change: 1.0975321761533996
 Stock: HON Open: $26.24 Close: $26.5 Percent Change: 0.9908536585365915%
 Stock: MNST Open: $27.59 Close: $27.82 Percent Change: 0.8336353751359203%
 Stock: ORCL Open: $15.92 Close: $16.129999 Percent Change: 1.3190891959799096%
-Stock: SNI Open: $24.1 Close: $24.23 Percent Change: 0.5394190871369253%} 
+Stock: SNI Open: $24.1 Close: $24.23 Percent Change: 0.5394190871369253%
+} 
 
 Cluster 4 {
 Total stocks included: 29
 Cluster's average percent change: 3.2625640608525455
-Stocks: Stock: DOW Open: $18.299999 Close: $18.85 Percent Change: 3.00547010958854%
+Stocks: 
+Stock: DOW Open: $18.299999 Close: $18.85 Percent Change: 3.00547010958854%
 Stock: CLX Open: $56.150002 Close: $57.790001 Percent Change: 2.920746111460505%
 Stock: AON Open: $42.580002 Close: $43.799999 Percent Change: 2.865187747055529%
 Stock: MRK Open: $25.65 Close: $26.459999 Percent Change: 3.1578908382066326%
@@ -58,12 +65,14 @@ Stock: MO Open: $14.93 Close: $15.5 Percent Change: 3.8178164768921654%
 Stock: DISCA Open: $13.350008 Close: $13.860003 Percent Change: 3.8201849766681786%
 Stock: MMC Open: $23.91 Close: $24.809999 Percent Change: 3.7641112505227983%
 Stock: PG Open: $60.52 Close: $62.880001 Percent Change: 3.899538995373425%
-Stock: FE Open: $54.799999 Close: $56.959999 Percent Change: 3.94160591134318%} 
+Stock: FE Open: $54.799999 Close: $56.959999 Percent Change: 3.94160591134318%
+} 
 
 Cluster 5 {
 Total stocks included: 12
 Cluster's average percent change: 4.784191427045587
-Stocks: Stock: PFE Open: $15.82 Close: $16.620001 Percent Change: 5.056896333754729%
+Stocks: 
+Stock: PFE Open: $15.82 Close: $16.620001 Percent Change: 5.056896333754729%
 Stock: RGR Open: $6.06 Close: $6.37 Percent Change: 5.115511551155124%
 Stock: NFLX Open: $22.62 Close: $23.809999 Percent Change: 5.2608267020336%
 Stock: GD Open: $49.349998 Close: $51.650002 Percent Change: 4.6605959335601215%
@@ -74,12 +83,14 @@ Stock: COST Open: $49.0 Close: $51.419998 Percent Change: 4.938771428571428%
 Stock: OMC Open: $25.74 Close: $26.99 Percent Change: 4.856254856254857%
 Stock: LMT Open: $73.699997 Close: $76.910004 Percent Change: 4.355504926275648%
 Stock: TGNA Open: $8.49 Close: $8.87 Percent Change: 4.475853945818598%
-Stock: PGR Open: $13.04 Close: $13.59 Percent Change: 4.21779141104295%} 
+Stock: PGR Open: $13.04 Close: $13.59 Percent Change: 4.21779141104295%
+} 
 
 Cluster 6 {
 Total stocks included: 24
 Cluster's average percent change: 6.453697320463529
-Stocks: Stock: MSFT Open: $18.65 Close: $19.870001 Percent Change: 6.541560321715817%
+Stocks: 
+Stock: MSFT Open: $18.65 Close: $19.870001 Percent Change: 6.541560321715817%
 Stock: MSFT Open: $18.65 Close: $19.870001 Percent Change: 6.541560321715817%
 Stock: DIS Open: $20.6 Close: $21.940001 Percent Change: 6.504859223300957%
 Stock: PNRA Open: $43.169998 Close: $45.93 Percent Change: 6.393333629526691%
@@ -102,12 +113,14 @@ Stock: CCL Open: $19.950001 Close: $21.190001 Percent Change: 6.21553853556197%
 Stock: GE Open: $17.07 Close: $18.129999 Percent Change: 6.209718804920921%
 Stock: NKE Open: $48.93 Close: $52.009998 Percent Change: 6.294702636419382%
 Stock: AFL Open: $41.130001 Close: $43.599998 Percent Change: 6.005341453796706%
-Stock: T Open: $27.41 Close: $29.08 Percent Change: 6.092666909886896%} 
+Stock: T Open: $27.41 Close: $29.08 Percent Change: 6.092666909886896%
+} 
 
 Cluster 7 {
 Total stocks included: 14
 Cluster's average percent change: 9.402001416606476
-Stocks: Stock: V Open: $48.119999 Close: $52.439999 Percent Change: 8.977556296291695%
+Stocks: 
+Stock: V Open: $48.119999 Close: $52.439999 Percent Change: 8.977556296291695%
 Stock: GS Open: $63.07 Close: $68.949997 Percent Change: 9.322969716188357%
 Stock: AAL Open: $5.72 Close: $6.17 Percent Change: 7.86713286713287%
 Stock: YUM Open: $25.0 Close: $27.040001 Percent Change: 8.160004%
@@ -120,27 +133,34 @@ Stock: JPM Open: $27.440001 Close: $30.25 Percent Change: 10.240520763829423%
 Stock: BAC Open: $13.7 Close: $15.05 Percent Change: 9.854014598540157%
 Stock: UA Open: $21.700001 Close: $23.85 Percent Change: 9.907829036505579%
 Stock: AMTD Open: $11.49 Close: $12.6 Percent Change: 9.660574412532632%
-Stock: ALL Open: $21.49 Close: $23.549999 Percent Change: 9.58584923220103%} 
+Stock: ALL Open: $21.49 Close: $23.549999 Percent Change: 9.58584923220103%
+} 
 
 Cluster 8 {
 Total stocks included: 6
 Cluster's average percent change: 13.390246199569399
-Stocks: Stock: AMZN Open: $40.16 Close: $45.209999 Percent Change: 12.574698705179301%
+Stocks: 
+Stock: AMZN Open: $40.16 Close: $45.209999 Percent Change: 12.574698705179301%
 Stock: USB Open: $24.75 Close: $27.91 Percent Change: 12.76767676767677%
 Stock: WFC Open: $24.860001 Close: $28.1 Percent Change: 13.032980167619465%
 Stock: WYNN Open: $35.0 Close: $40.02 Percent Change: 14.342857142857152%
 Stock: C Open: $6.87 Close: $7.82 Percent Change: 13.828238719068416%
-Stock: PRU Open: $18.049999 Close: $20.540001 Percent Change: 13.795025695015278%} 
+Stock: PRU Open: $18.049999 Close: $20.540001 Percent Change: 13.795025695015278%
+} 
 
 Cluster 9 {
 Total stocks included: 3
 Cluster's average percent change: 17.2643895771231
-Stocks: Stock: LVS Open: $4.3 Close: $5.03 Percent Change: 16.97674418604652%
+Stocks: 
+Stock: LVS Open: $4.3 Close: $5.03 Percent Change: 16.97674418604652%
 Stock: CBS Open: $6.23 Close: $7.31 Percent Change: 17.335473515248783%
-Stock: MET Open: $22.309999 Close: $26.209999 Percent Change: 17.480951030073996%} 
+Stock: MET Open: $22.309999 Close: $26.209999 Percent Change: 17.480951030073996%
+} 
 
 Cluster 10 {
 Total stocks included: 1
 Cluster's average percent change: 20.749782040104613
-Stocks: Stock: MS Open: $11.47 Close: $13.85 Percent Change: 20.749782040104613%} 
+Stocks: 
+Stock: MS Open: $11.47 Close: $13.85 Percent Change: 20.749782040104613%
+} 
 

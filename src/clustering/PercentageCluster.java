@@ -67,7 +67,7 @@ public class PercentageCluster implements Comparable<PercentageCluster>
 
         output += "Total stocks included: " + includedStocks.size() + "\n" +
                 "Cluster's average percent change: "+ clusterAverageChange() + "\n" +
-                "Stocks: " ;
+                "Stocks: \n" ;
 
         for(StockDataObject zc : includedStocks)
         {

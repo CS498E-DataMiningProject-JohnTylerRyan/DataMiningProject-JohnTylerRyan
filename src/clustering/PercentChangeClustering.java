@@ -250,7 +250,7 @@ public class PercentChangeClustering
         for(PercentageCluster out : outputClusters)
         {
             clusterCount++;
-            output += "Cluster " + clusterCount + " {\n" + out.toString() + "} \n\n";
+            output += "Cluster " + clusterCount + " {\n" + out.toString() + "\n} \n\n";
         }
 
         return output;
