@@ -47,9 +47,9 @@ public class StockDistributionAnalysis
 
 
         normalizeDistributions();
+        writeDistributions();
 
-
-        //True toString for the hash table
+        /*//True toString for the hash table
         for (String key : stockDistributions.keySet())
         {
             System.out.print(key + ": [");
@@ -61,7 +61,7 @@ public class StockDistributionAnalysis
 
             System.out.println("]");
         }
-
+        */
 
     }
 
@@ -157,7 +157,42 @@ public class StockDistributionAnalysis
 
     public void writeDistributions()
     {
+        BufferedWriter dataWriter;
+        File outFile;
+        String outputFileText = "";
 
+        for (String key : stockDistributions.keySet())
+        {
+            outputFileText += key;
+
+            for(double i : stockDistributions.get(key))
+            {
+                outputFileText += "," + i;
+            }
+
+            outputFileText += "\n";
+        }
+
+        try
+        {
+            outFile = new File(outputLocation + File.separatorChar + "stock_distributions.csv");
+            dataWriter = new BufferedWriter(new FileWriter(outFile));
+
+            if (outFile.exists())
+                outFile.delete();
+
+            outFile.createNewFile();
+
+            dataWriter.write(outputFileText);
+            dataWriter.flush();
+            dataWriter.close();
+        }
+        catch (IOException e)
+        {
+            System.err.println("Error writing clustering output");
+            e.printStackTrace();
+            System.exit(-1);
+        }
     }
 
     public static void main(String[] args)
