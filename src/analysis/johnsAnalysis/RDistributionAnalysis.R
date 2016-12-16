@@ -55,6 +55,7 @@ generateDistributionsHistograms <- function(data)
   {
     png(file = paste("./distributionBarplots/", data[i, 1] ,".png", sep = ""))
     barplot(unlist(data[i, 2:ncol(data)]),
+            ylim = c(0,.3),
             main = paste(data[i, 1], "Cluster Distribution", sep=" "),
             xlab = "Cluster (least change to greatest change)",
             ylab = "cluster occurance percentage")
@@ -82,7 +83,7 @@ generateCloseHistorgrams <- function(data, stockList, closenessMatrix, closeness
     
    png(file = paste("./closenessBarplots/diffMax-",closenessCutoff, "/", data[indexi, 1], "-", data[indexj, 1] ,".png", sep = ""))
    barplot(plotData,
-           ylim = c(0,.5),
+           ylim = c(0,.3),
            main = title,
            xlab = "Cluster (least change to greatest change)",
            ylab = "cluster occurance percentage",
